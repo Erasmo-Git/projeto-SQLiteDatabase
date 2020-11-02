@@ -6,11 +6,13 @@ public class Produto implements Serializable { // objeto do tipo objeto
     private String nome;
     private float valor;
     private int id;
+    private Categoria categoria;
 
-    public Produto(String nome, float valor, int id) {
+    public Produto(String nome, float valor, int id, Categoria categoria) {
         this.nome = nome;
         this.valor = valor;
         this.id = id;
+        this.categoria = categoria;
     }
 
     public String getNome() {
@@ -33,9 +35,11 @@ public class Produto implements Serializable { // objeto do tipo objeto
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
+
+    public Categoria getCategoria() { return categoria; }
+
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
     @Override
     public String toString() {
