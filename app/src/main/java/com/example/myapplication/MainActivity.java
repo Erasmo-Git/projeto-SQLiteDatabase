@@ -56,4 +56,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, CadastroProdutoActivity.class);
         startActivity(intent); // abre nova tela esperando um resultado quando ela fechar- REQUEST_CODE_NOVO_PRODUTO- ajuda a saber se o resultado foi da acoa desta startActivityForResult
     }
+
+    public void onClickCategorias(View v){
+        Intent intent = new Intent(MainActivity.this, ListarCategoriasActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

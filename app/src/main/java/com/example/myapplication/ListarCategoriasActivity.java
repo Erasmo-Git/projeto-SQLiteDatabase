@@ -46,4 +46,10 @@ public class ListarCategoriasActivity extends AppCompatActivity {
         Intent intent = new Intent(ListarCategoriasActivity.this, CadastroCategoriaActivity.class);
         startActivity(intent);
     }
+
+    public void onclickProdutos(View v){
+        Intent intent = new Intent(ListarCategoriasActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

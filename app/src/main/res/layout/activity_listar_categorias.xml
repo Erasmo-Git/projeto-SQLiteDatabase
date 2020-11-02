@@ -18,4 +18,11 @@
         android:layout_height="wrap_content"
         android:onClick="onClickNovaCategoria"
         android:text="nova categoria" />
+
+    <Button
+        android:id="@+id/btn_produtos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onclickProdutos"
+        android:text="produtos" />
 </LinearLayout>
