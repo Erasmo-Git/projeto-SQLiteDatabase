@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         boolean excluiu = pDAO.excluir(produtoClicadoExcluir.getId());
 
                         if (excluiu){
+                            adapterProdutos.remove(produtoClicadoExcluir);
                             Toast.makeText(MainActivity.this, "produto excluido", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(MainActivity.this, "erro ao excluir produto", Toast.LENGTH_LONG).show();
