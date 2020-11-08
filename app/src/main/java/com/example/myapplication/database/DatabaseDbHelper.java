@@ -11,10 +11,11 @@ import com.example.myapplication.database.contract.ProdutoContract;
 
 public class DatabaseDbHelper extends SQLiteOpenHelper { // para iniciar o banco de dados, cria-lo se nao existir e fazer update
 
-    public static final String DATABASE_NAME = "db.produto_v2";
-    public static final int DATABASE_VERSION = 3;
 
-    public DatabaseDbHelper(@Nullable Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
+    public static final String DATABASE_NAME = "db.produto_v2";
+    public static final int DATABASE_VERSION = 4;
+
+    public DatabaseDbHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

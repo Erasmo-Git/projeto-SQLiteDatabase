@@ -3,7 +3,11 @@ package com.example.myapplication.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.example.myapplication.CadastroProdutoActivity;
 import com.example.myapplication.database.entity.CategoriaEntity;
 import com.example.myapplication.database.entity.ProdutoEntity;
 import com.example.myapplication.modelo.Categoria;
@@ -14,13 +18,15 @@ import java.util.List;
 
 public class ProdutoDAO {
 
+
+
     private final String SQL_LISTAR_TODOS = "SELECT produto._id, nome, valor, idcategoria, descricao FROM " +
             ProdutoEntity.TABLE_NAME + " INNER JOIN " +
             CategoriaEntity.TABLE_NAME + " ON " +
             ProdutoEntity.COLUMN_NAME_ID_CATEGORIA + "=" +
             CategoriaEntity.TABLE_NAME + "." + CategoriaEntity._ID;
-
     private DBGateway dbGateway;
+    private SQLiteDatabase sqLiteDatabase;
 
     public ProdutoDAO (Context context){
         dbGateway = DBGateway.getInstance(context);
@@ -40,6 +46,23 @@ public class ProdutoDAO {
         return dbGateway.getDatabase().insert(ProdutoEntity.TABLE_NAME, null, contentValues) > 0;
     }
 
+
+    public boolean excluir(long idProduto){
+        SQLiteDatabase db = null;
+
+        try {
+            dbGateway.getDatabase().delete(ProdutoEntity.TABLE_NAME, ProdutoEntity._ID + "=?", new String[]{String.valueOf(idProduto)});
+        } catch (Exception e){
+            Log.d("excluir", "nao foi possivel deletar produto");
+            return false;
+        }finally {
+            if (db != null){
+            db.close();
+        }
+        }
+        return true;
+    }
+
     public List<Produto> listar(){
         List<Produto> produtos = new ArrayList<>();
         Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_LISTAR_TODOS, null);
@@ -50,7 +73,7 @@ public class ProdutoDAO {
             int idcategoria = cursor.getInt(cursor.getColumnIndex(ProdutoEntity.COLUMN_NAME_ID_CATEGORIA));
             String descricao = cursor.getString(cursor.getColumnIndex(CategoriaEntity.COLUMN_NAME_DESCRICAO));
             Categoria categoria = new Categoria(id, descricao);
-            produtos.add(new Produto(nome, valor, id, categoria));
+            produtos.add(new Produto( id, nome, valor, categoria));
         }
         cursor.close();
         return produtos;

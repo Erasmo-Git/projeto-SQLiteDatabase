@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ public class CadastroProdutoActivity extends AppCompatActivity {
     private int id = 0;
     private Spinner spinnerCategorias;
     private ArrayAdapter<Categoria> categoriasAdapter;
+    private ArrayAdapter<Produto> produtoAdapter;
     private EditText editTextNome;
     private EditText editTextValor;
 
@@ -47,11 +49,13 @@ public class CadastroProdutoActivity extends AppCompatActivity {
 
     private void carregarProduto(){
         Intent intent = getIntent();
-        if(intent != null && intent.getExtras() != null && intent.getExtras().get("produtoEdicao") != null){
+        if(intent != null && intent.getExtras() != null &&
+                intent.getExtras().get("produtoEdicao") != null){
             Produto produto = (Produto) intent.getExtras().get("produtoEdicao");
             editTextNome.setText(produto.getNome());
             editTextValor.setText(String.valueOf(produto.getValor()));
-            int posicaoCategoria = obterPosicaoCategoria(produto.getCategoria());
+
+            int posicaoCategoria = obterPosicaoCategoria(produto.getCategoria()); // CategoriaAdapter.getPosition(produto.getCategoria());
             spinnerCategorias.setSelection(posicaoCategoria);
             id = produto.getId();
         }
@@ -73,13 +77,13 @@ public class CadastroProdutoActivity extends AppCompatActivity {
     public void onClickSalvar(View v){
         String nome = editTextNome.getText().toString();
         float valor = Float.parseFloat(editTextValor.getText().toString());
-//        Categoria categoria = (Categoria) spinnerCategorias.getSelectedItem();
         int posicaoCategoria = spinnerCategorias.getSelectedItemPosition();
         Categoria categoria = (Categoria) categoriasAdapter.getItem(posicaoCategoria);
-        Produto produto = new Produto(nome, valor, id, categoria);
+        Produto produto = new Produto(id, nome, valor, categoria);
         ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
         boolean salvou = produtoDAO.salvar(produto);
         if (salvou){
+//            produtoAdapter.add(produto);
             finish();
         }else {
             Toast.makeText(CadastroProdutoActivity.this, "erro ao salvar", Toast.LENGTH_LONG).show();

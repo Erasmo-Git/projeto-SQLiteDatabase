@@ -1,17 +1,24 @@
 package com.example.myapplication.modelo;
 
+import android.content.Context;
+
+import com.example.myapplication.database.ProdutoDAO;
+
 import java.io.Serializable;
 
-public class Produto implements Serializable { // objeto do tipo objeto
+public class Produto implements Serializable { // objeto do tipo serealizable
+
     private String nome;
     private float valor;
     private int id;
     private Categoria categoria;
 
-    public Produto(String nome, float valor, int id, Categoria categoria) {
+    ProdutoDAO produtoDAO;
+
+    public Produto(int id, String nome, float valor, Categoria categoria) {
+        this.id = id;
         this.nome = nome;
         this.valor = valor;
-        this.id = id;
         this.categoria = categoria;
     }
 
@@ -45,4 +52,8 @@ public class Produto implements Serializable { // objeto do tipo objeto
     public String toString() {
         return id + "-" + nome;
     }
+
+//    public boolean exclucaoProduto (long idProdutoExcluido){
+//        return this.produtoDAO.excluir(idProdutoExcluido);
+//    }
 }
