@@ -53,7 +53,4 @@ public class Produto implements Serializable { // objeto do tipo serealizable
         return id + "-" + nome;
     }
 
-//    public boolean exclucaoProduto (long idProdutoExcluido){
-//        return this.produtoDAO.excluir(idProdutoExcluido);
-//    }
 }

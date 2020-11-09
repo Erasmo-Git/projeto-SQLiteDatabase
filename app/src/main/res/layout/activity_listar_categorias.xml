@@ -12,18 +12,26 @@
         android:layout_width="match_parent"
         android:layout_height="400dp" />
 
-    <Button
-        android:id="@+id/btn_nova_categoria"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickNovaCategoria"
-        android:text="nova categoria" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btn_produtos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onclickProdutos"
-        android:text="produtos" />
+        <Button
+            android:id="@+id/btn_produtos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onclickProdutos"
+            android:text="produtos" />
+
+        <Button
+            android:id="@+id/btn_nova_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onClickNovaCategoria"
+            android:text="nova categoria" />
+    </LinearLayout>
 
 </LinearLayout>
